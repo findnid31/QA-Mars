@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35122.118
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QAMars", "QAMars.csproj", "{075E85AE-C16E-4C28-A7DD-600433D3478B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Specflow", "Specflow", "{B67389A4-47E8-4BCE-9714-B7341245DD47}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{075E85AE-C16E-4C28-A7DD-600433D3478B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{075E85AE-C16E-4C28-A7DD-600433D3478B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{075E85AE-C16E-4C28-A7DD-600433D3478B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{075E85AE-C16E-4C28-A7DD-600433D3478B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AE069A66-E974-4693-B351-EE0543DAF3B4}
+	EndGlobalSection
+EndGlobal
