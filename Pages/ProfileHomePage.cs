@@ -51,11 +51,11 @@ namespace QAMars.Pages
             {
                 Console.WriteLine("User Logged In successfully");
             }
-            else 
+            else
             {
                 Console.WriteLine("User is Unable to Log In");
             }
 
         }
-        }
     }
+}
