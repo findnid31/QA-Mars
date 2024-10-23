@@ -76,21 +76,16 @@ namespace QAMars.Specflow
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("create language record with data")]
-        [NUnit.Framework.CategoryAttribute("TS01")]
-        [NUnit.Framework.CategoryAttribute("TC04")]
-        [NUnit.Framework.CategoryAttribute("HappyPath")]
-        [NUnit.Framework.TestCaseAttribute("English", "Fluent", null)]
-        [NUnit.Framework.TestCaseAttribute("SPANISH", "Native", null)]
-        [NUnit.Framework.TestCaseAttribute("4152", "Native", null)]
-        [NUnit.Framework.TestCaseAttribute("", "Fluent", null)]
-        [NUnit.Framework.TestCaseAttribute("Mandarin", "", null)]
-        [NUnit.Framework.TestCaseAttribute("Hindi", "Conversational", null)]
+        [NUnit.Framework.CategoryAttribute("PositiveTestScenario")]
+        [NUnit.Framework.TestCaseAttribute("ENgLiSh", "Fluent", null)]
+        [NUnit.Framework.TestCaseAttribute("SP A NISH", "Native", null)]
+        [NUnit.Framework.TestCaseAttribute("4152", "Basic", null)]
+        [NUnit.Framework.TestCaseAttribute("Maori", "Conversational", null)]
+        [NUnit.Framework.TestCaseAttribute("&#@", "Conversational", null)]
         public void CreateLanguageRecordWithData(string language, string level, string[] exampleTags)
         {
             string[] @__tags = new string[] {
-                    "TS01",
-                    "TC04",
-                    "HappyPath"};
+                    "PositiveTestScenario"};
             if ((exampleTags != null))
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
@@ -124,13 +119,55 @@ this.ScenarioInitialize(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Error is displayed when a Invalid language record is created")]
+        [NUnit.Framework.CategoryAttribute("errorMessage")]
+        [NUnit.Framework.TestCaseAttribute("", "Fluent", null)]
+        [NUnit.Framework.TestCaseAttribute("Mandarin", "", null)]
+        [NUnit.Framework.TestCaseAttribute("8979879", "9", null)]
+        public void ErrorIsDisplayedWhenAInvalidLanguageRecordIsCreated(string invalidLanguage, string invalidLevel, string[] exampleTags)
+        {
+            string[] @__tags = new string[] {
+                    "errorMessage"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            string[] tagsOfScenario = @__tags;
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("invalid language", invalidLanguage);
+            argumentsOfScenario.Add("invalid level", invalidLevel);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Error is displayed when a Invalid language record is created", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 23
+ this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 24
+ testRunner.Given("I logged into Mars portal successfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 25
+ testRunner.When(string.Format("I add a language \"{0}\" and level \"{1}\"", invalidLanguage, invalidLevel), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 26
+ testRunner.Then("error message should be seen successfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("edit language record with data")]
         [NUnit.Framework.CategoryAttribute("TS01")]
         [NUnit.Framework.CategoryAttribute("HappyPath")]
-        [NUnit.Framework.TestCaseAttribute("SPANISH", "Native", null)]
-        [NUnit.Framework.TestCaseAttribute("5487", "Conversational", null)]
-        [NUnit.Framework.TestCaseAttribute("English", "Fluent", null)]
-        public void EditLanguageRecordWithData(string updatedLanguage, string updatedLevel, string[] exampleTags)
+        [NUnit.Framework.TestCaseAttribute("English", "Conversational", "Tagalog", "Native", null)]
+        [NUnit.Framework.TestCaseAttribute("HIndi", "Fluent", "Hindi", "Conversational", null)]
+        [NUnit.Framework.TestCaseAttribute("Maori", "Fluent", "English", "Fluent", null)]
+        public void EditLanguageRecordWithData(string language, string level, string updatedLanguage, string updatedLevel, string[] exampleTags)
         {
             string[] @__tags = new string[] {
                     "TS01",
@@ -141,10 +178,12 @@ this.ScenarioInitialize(scenarioInfo);
             }
             string[] tagsOfScenario = @__tags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("Language", language);
+            argumentsOfScenario.Add("Level", level);
             argumentsOfScenario.Add("Updated Language", updatedLanguage);
             argumentsOfScenario.Add("Updated level", updatedLevel);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("edit language record with data", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 25
+#line 36
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -154,13 +193,14 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 26
+#line 37
  testRunner.Given("I logged into Mars portal successfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 27
- testRunner.When(string.Format("I edit an existing language to \"{0}\" and level to \"<Updated Level>\"", updatedLanguage), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 38
+ testRunner.When(string.Format("I edit an existing language\"{0}\" and \"{1}\" to \"{2}\" and level to \"<Updated Level>" +
+                            "\"", language, level, updatedLanguage), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 28
+#line 39
  testRunner.Then(string.Format("new \"{0}\" record should be displayed successfully", updatedLanguage), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -170,13 +210,23 @@ this.ScenarioInitialize(scenarioInfo);
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("delete language record with valid data")]
         [NUnit.Framework.CategoryAttribute("tag1")]
-        public void DeleteLanguageRecordWithValidData()
+        [NUnit.Framework.TestCaseAttribute("English", "Conversational", null)]
+        [NUnit.Framework.TestCaseAttribute("HIndi", "Fluent", null)]
+        [NUnit.Framework.TestCaseAttribute("Maori", "Fluent", null)]
+        public void DeleteLanguageRecordWithValidData(string language, string level, string[] exampleTags)
         {
-            string[] tagsOfScenario = new string[] {
+            string[] @__tags = new string[] {
                     "tag1"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            string[] tagsOfScenario = @__tags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("Language", language);
+            argumentsOfScenario.Add("Level", level);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("delete language record with valid data", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 39
+#line 50
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -186,13 +236,13 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 40
+#line 51
  testRunner.Given("I logged into Mars portal successfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 41
- testRunner.When("I have an existing record to delete", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 52
+ testRunner.When(string.Format("I have an existing \"{0}\" and \"{1}\" record to delete", language, level), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 42
+#line 53
  testRunner.Then("the record should be deleted successfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }

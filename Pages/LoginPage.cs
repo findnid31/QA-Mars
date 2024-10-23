@@ -1,4 +1,7 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using QAMars.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,18 +10,13 @@ using System.Threading.Tasks;
 
 namespace QAMars.Pages
 {
-    public class LoginPage
+    public class LoginPage : CommonDriver
     {
-        private readonly IWebDriver driver;
-        public LoginPage(IWebDriver driver)
-        {
-            this.driver = driver;
-
-        }
 
         //Functions that allow users to Login to QA  mars
-        public void LoginActions(IWebDriver driver) 
+        public void LoginActions()
         {
+
             //Launch QA mars Portal
             driver.Navigate().GoToUrl("http://localhost:5000/");
             driver.Manage().Window.Maximize();
@@ -41,7 +39,8 @@ namespace QAMars.Pages
             IWebElement loginButton = driver.FindElement(By.XPath("//button[@class='fluid ui teal button']"));
             loginButton.Click();
             Thread.Sleep(2000);
-            
+
         }
+        
     }
 }

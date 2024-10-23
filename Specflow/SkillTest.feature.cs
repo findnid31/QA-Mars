@@ -76,15 +76,17 @@ namespace QAMars.Specflow
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("create Skill record with data")]
-        [NUnit.Framework.CategoryAttribute("tag1")]
+        [NUnit.Framework.CategoryAttribute("PostiveScenario")]
+        [NUnit.Framework.CategoryAttribute("NegativeWithvalidInput")]
         [NUnit.Framework.TestCaseAttribute("C#", "Beginner", null)]
-        [NUnit.Framework.TestCaseAttribute("", "Intermediate", null)]
-        [NUnit.Framework.TestCaseAttribute("X23", "", null)]
+        [NUnit.Framework.TestCaseAttribute("HeNNa ArtisT", "Intermediate", null)]
+        [NUnit.Framework.TestCaseAttribute("H7474 baker", "Expert", null)]
         [NUnit.Framework.TestCaseAttribute("Math", "Expert", null)]
         public void CreateSkillRecordWithData(string skill, string level, string[] exampleTags)
         {
             string[] @__tags = new string[] {
-                    "tag1"};
+                    "PostiveScenario",
+                    "NegativeWithvalidInput"};
             if ((exampleTags != null))
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
@@ -121,17 +123,64 @@ this.ScenarioInitialize(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Error is displayed when a Invalid Skill record is created")]
+        [NUnit.Framework.CategoryAttribute("NegativeWithInvalidInput")]
+        [NUnit.Framework.TestCaseAttribute("", "Intermediate", null)]
+        [NUnit.Framework.TestCaseAttribute("Nail Art", "", null)]
+        [NUnit.Framework.TestCaseAttribute("Math", "23", null)]
+        public void ErrorIsDisplayedWhenAInvalidSkillRecordIsCreated(string invalidSkill, string invalidLevel, string[] exampleTags)
+        {
+            string[] @__tags = new string[] {
+                    "NegativeWithInvalidInput"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            string[] tagsOfScenario = @__tags;
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("Invalid Skill", invalidSkill);
+            argumentsOfScenario.Add("Invalid Level", invalidLevel);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Error is displayed when a Invalid Skill record is created", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 22
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 23
+testRunner.Given("I logged into Mars portal", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 24
+testRunner.And("I navigate to Skill tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 25
+testRunner.When(string.Format("I add an invalid skill \"{0}\" and invalid level \"{1}\"", invalidSkill, invalidLevel), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 26
+testRunner.Then("the error message should be displayed successfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Edit Skill record with new data")]
-        [NUnit.Framework.TestCaseAttribute("Sewing", "Beginner", null)]
-        [NUnit.Framework.TestCaseAttribute("Baking", "Expert", null)]
-        public void EditSkillRecordWithNewData(string updatedSkill, string updatedLevel, string[] exampleTags)
+        [NUnit.Framework.TestCaseAttribute("Baking", "Expert", "Sewing", "Beginner", null)]
+        [NUnit.Framework.TestCaseAttribute("Coding", "Beginner", "Baking", "Expert", null)]
+        public void EditSkillRecordWithNewData(string skill, string level, string updatedSkill, string updatedLevel, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("Skill", skill);
+            argumentsOfScenario.Add("Level", level);
             argumentsOfScenario.Add("Updated Skill", updatedSkill);
             argumentsOfScenario.Add("Updated Level", updatedLevel);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Edit Skill record with new data", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 21
+#line 34
  this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -141,16 +190,16 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 22
+#line 35
  testRunner.Given("I logged into Mars portal", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 23
+#line 36
  testRunner.And("I navigate to Skill tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 24
- testRunner.When(string.Format("I edit an existing skill \"{0}\" and level \"{1}\"", updatedSkill, updatedLevel), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 37
+ testRunner.When(string.Format("I edit an existing \"{0}\" and \"{1}\" to \"{2}\" and level \"{3}\"", skill, level, updatedSkill, updatedLevel), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 25
+#line 38
  testRunner.Then(string.Format("the new \"{0}\" record should be displayed successfully", updatedSkill), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -159,12 +208,16 @@ this.ScenarioInitialize(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("delete an existing Skill record")]
-        public void DeleteAnExistingSkillRecord()
+        [NUnit.Framework.TestCaseAttribute("Knitting", "Beginner", null)]
+        [NUnit.Framework.TestCaseAttribute("Reading", "Expert", null)]
+        public void DeleteAnExistingSkillRecord(string skill, string level, string[] exampleTags)
         {
-            string[] tagsOfScenario = ((string[])(null));
+            string[] tagsOfScenario = exampleTags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("Skill", skill);
+            argumentsOfScenario.Add("Level", level);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("delete an existing Skill record", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 32
+#line 45
  this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -174,16 +227,16 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 33
+#line 46
  testRunner.Given("I logged into Mars portal", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 34
+#line 47
  testRunner.And("I navigate to Skill tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 35
- testRunner.When("I have an existing skill record to delete", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 48
+ testRunner.When(string.Format("I have a \"{0}\" and \"{1}\" record to delete", skill, level), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 36
+#line 49
  testRunner.Then("the skill record should be deleted successfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }

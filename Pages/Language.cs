@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework.Legacy;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using QAMars.Utilities;
 using SeleniumExtras.WaitHelpers;
@@ -12,19 +13,12 @@ using System.Threading.Tasks;
 
 namespace QAMars.Pages
 {
-    public class LanguageTest :CommonDriver
+    public class LanguageTest : CommonDriver
     {
 
-        public readonly IWebDriver driver;
-        public LanguageTest(IWebDriver driver)
+        public void AddLanguage(string language, string level)
         {
-            this.driver = driver;
-
-        }
-
-        public void AddLanguage(IWebDriver driver, string language, string level)
-        {
-            Wait.WaitToBeVisible(driver,"XPath", "//div[@data-tab='first']//div[text()='Add New']", 5);
+            Wait.WaitToBeVisible(driver, "XPath", "//div[@data-tab='first']//div[text()='Add New']", 5);
 
             //Click on Add language button
             IWebElement addLanguageButton = driver.FindElement(By.XPath("//div[@data-tab='first']//div[text()='Add New']"));
@@ -40,66 +34,63 @@ namespace QAMars.Pages
             chooseLanguageLevelDropdown.Click();
 
             //Click on Add button
-            IWebElement addButton = driver.FindElement(By.XPath("//input[@value='Add']")); 
+            IWebElement addButton = driver.FindElement(By.XPath("//input[@value='Add']"));
             addButton.Click();
             Thread.Sleep(3000);
 
         }
 
-        /*public void ClearData(IWebDriver driver) 
+        public void ClearData()
         {
-            try
-            {
-                var deleteButtons = driver.FindElements(By.XPath("//td[@class='right aligned']//i[@class='remove icon']"));
-                foreach (var button in deleteButtons)
-                {
-                    button.Click();
-                }
-            }
-            catch (NoSuchElementException)
-            {
-                Console.WriteLine("Nothing to delete");
-            }
-              
-         }*/
 
-        public void ClearData(IWebDriver driver)
-        {
             try
             {
                 var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-                var deleteButtons = wait.Until(drv => drv.FindElements(By.XPath("//td[@class='right aligned']//i[@class='remove icon']")));
+                var deleteButtons = driver.FindElements(By.XPath("//td[@class='right aligned']//i[@class='remove icon']"));
+
+                // Check if there are any delete buttons found
+                if (deleteButtons.Count == 0)
+                {
+                    Console.WriteLine("Nothing to delete");
+                    return;
+                }
 
                 foreach (var button in deleteButtons)
                 {
-                    wait.Until(ExpectedConditions.ElementToBeClickable(button)).Click();
+                    // Wait for each button to be clickable
+                    wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(button)).Click();
+                    Thread.Sleep(5000);
                 }
-            }
-            catch (NoSuchElementException)
-            {
-                Console.WriteLine("Nothing to delete");
             }
             catch (WebDriverTimeoutException)
             {
                 Console.WriteLine("Timed out waiting for elements to be clickable");
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }
         }
 
-        public string GetNewLanguage(IWebDriver driver, string language)
-        {   
+
+        public string GetNewLanguage(string language)
+        {
+            Wait.WaitToBeVisible(driver, "XPath", "(//div[text()='Add New']/ancestor::thead/following-sibling::tbody[last()]/tr/td)[1]",8);
+
             //Get New language
             IWebElement newLanguage = driver.FindElement(By.XPath("(//div[text()='Add New']/ancestor::thead/following-sibling::tbody[last()]/tr/td)[1]"));
             return newLanguage.Text;
+            Thread.Sleep(3000);
         }
-        public string GetEditedLanguage(IWebDriver driver, string finalvalue)
+        public string GetEditedLanguage(string finalvalue)
         {
             //Get Edited language
             IWebElement editedLanguage = driver.FindElement(By.XPath("(//div[text()='Add New']/ancestor::thead/following-sibling::tbody/tr/td)[1]"));
             return editedLanguage.Text;
         }
-        public void EditLanguageRecord(IWebDriver driver, string language, string level)
+        public void EditLanguageRecord(string language, string level)
         {
-            Wait.WaitToBeClickable(driver,"XPath","//td[@class='right aligned']//i[@class='outline write icon']",3);
+            Wait.WaitToBeClickable(driver, "XPath", "//td[@class='right aligned']//i[@class='outline write icon']", 3);
 
             //Click Edit button 
             IWebElement editButton = driver.FindElement(By.XPath("//td[@class='right aligned']//i[@class='outline write icon']"));
@@ -111,26 +102,28 @@ namespace QAMars.Pages
             valueToBeEdited.SendKeys(language);
 
             //Edit the language level
-            IWebElement chooseLanguageLevelDropdown = driver.FindElement (By.XPath("//select[@name='level']"));//(By.Name(initiallevel))
+            IWebElement chooseLanguageLevelDropdown = driver.FindElement(By.XPath("//select[@name='level']"));//(By.Name(initiallevel))
             chooseLanguageLevelDropdown.SendKeys(level);
-            //chooseLanguageLevelDropdown.Click();
+
 
             //Click on Update button
             IWebElement updateButton = driver.FindElement(By.XPath("//input[@value='Update']"));
             updateButton.Click();
+            Thread.Sleep(2000);
 
         }
 
-        public void DeleteLanguageRecord(IWebDriver driver)
+        public void DeleteLanguageRecord(string language)
         {
-            Wait.WaitToBeClickable(driver,"XPath","//td[@class='right aligned']//i[@class='remove icon']",3);
+            Wait.WaitToBeClickable(driver, "XPath", "//td[@class='right aligned']//i[@class='remove icon']", 5);
 
             //Click Delete button
             IWebElement deleteButton = driver.FindElement(By.XPath("//td[@class='right aligned']//i[@class='remove icon']"));
             deleteButton.Click();
+            Thread.Sleep(3000);
 
         }
+
+        
     }
 }
-
-

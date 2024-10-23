@@ -11,12 +11,12 @@ namespace QAMars.Pages
 {
     public class ProfileHomePage : CommonDriver
     {
-        private readonly IWebDriver driver;
-        public ProfileHomePage(IWebDriver driver)
+        //private readonly IWebDriver driver;
+        /*public ProfileHomePage(IWebDriver driver)
         {
             this.driver = driver;
 
-        }
+        }*/
         public void NavigatetoLanguageTab()
         {
             try
@@ -41,21 +41,22 @@ namespace QAMars.Pages
             {
                 Assert.Fail("Unable to access Skill");
             }
-
+            Thread.Sleep(3000);
         }
 
-        public void VerifyIfUserIsLoggedIn()
+        public void CheckUser()
         {
-            IWebElement Username = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]//div[1]//div[2]//span\r\n")); // write tag name
-            if (Username.Text == "hi Nidhi")
+            IWebElement checkUser = driver.FindElement(By.XPath("//span[text()='Hi ']"));
+            if (checkUser.Text == "Hi nidhi")
             {
-                Console.WriteLine("User Logged In successfully");
+                Console.WriteLine("User successfully logged in");
             }
-            else 
+            else
             {
-                Console.WriteLine("User is Unable to Log In");
+                Console.WriteLine("User not logged in");
             }
 
-        }
         }
     }
+}
+
