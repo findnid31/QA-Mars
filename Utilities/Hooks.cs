@@ -15,19 +15,15 @@ namespace QAMars.Utilities
 
     public class Hooks : CommonDriver
     {
-        private static IWebDriver driver;
-        // private readonly LanguageTest languagePageObj;
-        private readonly LoginPage loginPageObj;
-        //private readonly Skill skillPageObj;
+        private static IWebDriver driver;        
+        private readonly LoginPage loginPageObj;        
         private readonly ProfileHomePage profileHomePageObj; 
 
         public Hooks()
         {
-            //languagePageObj = new LanguageTest();
             loginPageObj = new LoginPage();
             profileHomePageObj = new ProfileHomePage();
-            //skillPageObj = new Skill();
-        }
+         }
 
         [BeforeScenario]
         public void BeforeScenario()

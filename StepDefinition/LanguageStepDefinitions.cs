@@ -39,10 +39,9 @@ namespace ConsoleApp2.QAMars.StepDefinition
         [When(@"I add a language ""([^""]*)"" and language level ""([^""]*)""")]
         public void WhenIAddALanguageAndLanguageLevel(string language, string level)
         {
-                   
+                  
             languagePageObj.AddLanguage(language, level);
-            
-
+         
         }
         //Verify if language record is created successfully
 
@@ -85,7 +84,6 @@ namespace ConsoleApp2.QAMars.StepDefinition
         [When(@"I edit an existing language""([^""]*)"" and ""([^""]*)"" to ""([^""]*)"" and level to ""([^""]*)""")]
         public void WhenIEditAnExistingLanguageAndToAndLevelTo(string language, string level, string elang, string elevel)
         {
-            //languagePageObj.ClearData();
             languagePageObj.AddLanguage(language, level);
             languagePageObj.EditLanguageRecord(elang, elevel);
         }
@@ -113,7 +111,7 @@ namespace ConsoleApp2.QAMars.StepDefinition
            [When(@"I edit an existing language ""([^""]*)"" and ""([^""]*)"" record to delete")]
         public void WhenIHaveAnExistingAndRecordToDelete(string language, string level)
         {
-            //languagePageObj.ClearData();
+           
             languagePageObj.AddLanguage(language, level);
             languagePageObj.DeleteLanguageRecord(language);
         }

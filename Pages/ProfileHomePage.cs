@@ -11,12 +11,7 @@ namespace QAMars.Pages
 {
     public class ProfileHomePage : CommonDriver
     {
-        //private readonly IWebDriver driver;
-        /*public ProfileHomePage(IWebDriver driver)
-        {
-            this.driver = driver;
-
-        }*/
+        
         public void NavigatetoLanguageTab()
         {
             try
