@@ -31,6 +31,7 @@ Examples:
 | Nail Art      |               |
 |  Math         |  23		    |
 
+@EditSkill
 	Scenario: Edit Skill record with new data
 	Given I logged into Mars portal 
 	And I navigate to Skill tab
@@ -42,6 +43,7 @@ Examples:
 	|Baking  | Expert    | Sewing        | Beginner      |
 	|Coding  | Beginner  | Baking        | Expert        |
 
+	@DeleteSkill
 	Scenario Outline: delete an existing Skill record 
 	Given I logged into Mars portal
 	And I navigate to Skill tab

@@ -11,9 +11,9 @@ namespace QAMars.Utilities
 {
     public class CommonDriver
     {
-
         public static IWebDriver driver;
-        
+
+
         public void BrowserSetup()
         {
             // Open Chrome Browser
@@ -21,8 +21,6 @@ namespace QAMars.Utilities
             driver.Manage().Window.Maximize();
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
         }
-        
-
 
 
         public void DeleteAllRecords()
@@ -31,21 +29,34 @@ namespace QAMars.Utilities
             {
                 while (true) // Loop until no more records to delete
                 {
-                    Wait.WaitToBeClickable(driver, "XPath", "//td[@class='right aligned']//i[@class='remove icon']", 15);
-                    IWebElement deleteButton = driver.FindElement(By.XPath("//td[@class='right aligned']//i[@class='remove icon']"));
-                    deleteButton.Click();
-                    Thread.Sleep(2000); 
+                    IWebElement deleteButton;
+
+                    try
+                    {
+                        // Wait for the delete button to be clickable
+                        Wait.WaitToBeClickable(driver, "XPath", "(//td[@class='right aligned']//i[@class='remove icon'])[1]", 15);
+                      
+                        deleteButton = driver.FindElement(By.XPath("(//td[@class='right aligned']//i[@class='remove icon'])[1]"));
+                      
+                        deleteButton.Click();
+
+                     }
+                    catch (NoSuchElementException)
+                    {
+                        // If the delete button is not found, exit the loop
+                        Console.WriteLine("All records deleted.");
+                        break;
+                    }
+                    catch (ElementNotInteractableException)
+                    {
+                        Console.WriteLine("The delete button is not interactable. It might be hidden or disabled.");
+                        break;
+                    }
                 }
-            }
-            catch (NoSuchElementException)
-            {
-                // No more records to delete
-                Console.WriteLine("All records deleted.");
             }
             catch (Exception ex)
             {
-                // Log other exceptions for troubleshooting
-                Console.WriteLine($"An error occurred while deleting records: {ex.Message}");
+                Console.WriteLine($"An unexpected error occurred: {ex.Message}");
             }
         }
 

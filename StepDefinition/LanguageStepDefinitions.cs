@@ -34,14 +34,15 @@ namespace ConsoleApp2.QAMars.StepDefinition
         [Given(@"I logged into Mars portal successfully")]
         public void GivenILoggedIntoMarsPortalSuccessfully()
         {
-             profileHomePageObj.CheckUser();
+            profileHomePageObj.NavigatetoLanguageTab();
+            profileHomePageObj.CheckUser();
+     
         }
         [When(@"I add a language ""([^""]*)"" and language level ""([^""]*)""")]
         public void WhenIAddALanguageAndLanguageLevel(string language, string level)
         {
                   
             languagePageObj.AddLanguage(language, level);
-         
         }
         //Verify if language record is created successfully
 
@@ -63,7 +64,6 @@ namespace ConsoleApp2.QAMars.StepDefinition
         public void WhenIAddALanguageAndLevel(string invalidlanguage, string invalidlevel)
         {
             languagePageObj.AddLanguage(invalidlanguage, invalidlevel);
-
         }
         // Error message should be seen for invalid language and level
         [Then(@"error message should be seen successfully")]
@@ -78,8 +78,6 @@ namespace ConsoleApp2.QAMars.StepDefinition
 
         }
        
-
-
         //Edit language page object initialization and definition
         [When(@"I edit an existing language""([^""]*)"" and ""([^""]*)"" to ""([^""]*)"" and level to ""([^""]*)""")]
         public void WhenIEditAnExistingLanguageAndToAndLevelTo(string language, string level, string elang, string elevel)
@@ -106,16 +104,15 @@ namespace ConsoleApp2.QAMars.StepDefinition
                 languagePageObj.DeleteLanguageRecord(updatedlanguage);
             }
         }
-
         //Delete language page object initialization and definition
-           [When(@"I edit an existing language ""([^""]*)"" and ""([^""]*)"" record to delete")]
+        [When(@"I have an existing ""([^""]*)"" and ""([^""]*)"" record to delete")]
         public void WhenIHaveAnExistingAndRecordToDelete(string language, string level)
         {
-           
             languagePageObj.AddLanguage(language, level);
             languagePageObj.DeleteLanguageRecord(language);
         }
 
+        
 
         [Then(@"the record should be deleted successfully")]
         public void ThenTheRecordShouldBeDeletedSuccessfully()
@@ -134,15 +131,7 @@ namespace ConsoleApp2.QAMars.StepDefinition
             }
 
         }
-        public string GetNewLanguage(string language)
-        {
-            Wait.WaitToBeVisible(driver, "XPath", "(//div[text()='Add New']/ancestor::thead/following-sibling::tbody[last()]/tr/td)[1]", 8);
-
-            //Get New language
-            IWebElement newLanguage = driver.FindElement(By.XPath("(//div[text()='Add New']/ancestor::thead/following-sibling::tbody[last()]/tr/td)[1]"));
-            return newLanguage.Text;
-            Thread.Sleep(3000);
-        }
+      
 
 
     }

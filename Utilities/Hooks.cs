@@ -15,15 +15,15 @@ namespace QAMars.Utilities
 
     public class Hooks : CommonDriver
     {
-        private static IWebDriver driver;        
-        private readonly LoginPage loginPageObj;        
-        private readonly ProfileHomePage profileHomePageObj; 
+        private static IWebDriver driver;
+        private readonly LoginPage loginPageObj;
+        private readonly ProfileHomePage profileHomePageObj;
 
         public Hooks()
         {
             loginPageObj = new LoginPage();
             profileHomePageObj = new ProfileHomePage();
-         }
+        }
 
         [BeforeScenario]
         public void BeforeScenario()
@@ -42,14 +42,11 @@ namespace QAMars.Utilities
         {
             profileHomePageObj.NavigateToSkillTab();
             DeleteAllRecords();
-
         }
-
 
         [AfterScenario]
         public void AfterScenario()
         {
-
             CloseBrowser();
         }
 

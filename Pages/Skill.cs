@@ -12,6 +12,16 @@ namespace QAMars.Pages
 {
     public class Skill : CommonDriver
     {
+        private static IWebElement addSkillButton => driver.FindElement(By.XPath("//div[@data-tab='second']//div[text()='Add New']"));
+        private static IWebElement addSkillTextbox => driver.FindElement(By.XPath("//input[@placeholder='Add Skill']"));
+        private static IWebElement chooseSkillLevelDropdown => driver.FindElement(By.XPath("//select[@name='level']"));
+        private static IWebElement addButton => driver.FindElement(By.XPath("//input[@value='Add']"));
+        private static IWebElement newSkill => driver.FindElement(By.XPath("(//div[@data-tab='second']//tbody//td[1])[last()]"));
+        private static IWebElement editSkillButton => driver.FindElement(By.XPath("//div[@data-tab='second']//td[@class='right aligned']//i[@class='outline write icon']"));
+        private static IWebElement SkillToBeEdited => driver.FindElement(By.XPath("//input[@placeholder='Add Skill']"));
+        private static IWebElement updateButton => driver.FindElement(By.XPath("//input[@value='Update']"));
+        private static IWebElement deleteButton => driver.FindElement(By.XPath("(//div[@data-tab='second']//i[@class='remove icon'])"));
+
 
         public void AddSkill(string skill, string level)
         {
@@ -19,83 +29,65 @@ namespace QAMars.Pages
             Wait.WaitToBeClickable(driver, "XPath", "//div[@data-tab='second']//div[text()='Add New']", 3);
 
             //Click on Add skill button
-            IWebElement addSkillButton = driver.FindElement(By.XPath("//div[@data-tab='second']//div[text()='Add New']"));
             addSkillButton.Click();
 
             //Click on Add Skill Textbox
-            IWebElement addSkillTextbox = driver.FindElement(By.XPath("//input[@placeholder='Add Skill']"));
             addSkillTextbox.SendKeys(skill);
 
             //Choose skill level
-            IWebElement chooseSkillLevelDropdown = driver.FindElement(By.XPath("//select[@name='level']"));
             chooseSkillLevelDropdown.SendKeys(level);
             chooseSkillLevelDropdown.Click();
 
             Wait.WaitToBeClickable(driver, "XPath", "//input[@value='Add']", 3);
 
             //Click on Add button
-            IWebElement addButton = driver.FindElement(By.XPath("//input[@value='Add']"));
             addButton.Click();
             Thread.Sleep(3000);
 
 
         }
-        public void ClearSkill()
-        {
-            try
+        
+            public void ClearSkill()
             {
-                var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-                var deleteButtons = driver.FindElements(By.XPath("//div[@data-tab='second']//td[@class='right aligned']//i[@class='remove icon']"));
 
-                // Check if there are any delete buttons found
-                if (deleteButtons.Count == 0)
+                try
+                {
+                    var deleteButtons = driver.FindElements(By.XPath("//div[@data-tab='second']//td[@class='right aligned']//i[@class='remove icon']"));
+
+                    foreach (var button in deleteButtons)
+                    {
+                        button.Click();
+                        Thread.Sleep(5000);
+                    }
+                }
+                catch (NoSuchElementException)
                 {
                     Console.WriteLine("Nothing to delete");
-                    return;
                 }
 
-                foreach (var button in deleteButtons)
-                {
-                    // Wait for each button to be clickable
-                    wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(button)).Click();
-                    Thread.Sleep(5000);
-                }
             }
-            catch (WebDriverTimeoutException)
-            {
-                Console.WriteLine("Timed out waiting for elements to be clickable");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"An error occurred: {ex.Message}");
-            }
-        }
+        
         public string GetNewSkill(string skill)
         {
             Wait.WaitToBeVisible(driver, "XPath", "(//div[@data-tab='second']//tbody//td[1])[last()]", 3);
-            IWebElement newSkill = driver.FindElement(By.XPath("(//div[@data-tab='second']//tbody//td[1])[last()]"));
             return newSkill.Text;
         }
 
         public void EditSkillRecord(string updatedskill, string updatedlevel)
         {
-            Thread.Sleep(4000);
+            Wait.WaitToBeClickable(driver, "XPath", "//div[@data-tab='second']//td[@class='right aligned']//i[@class='outline write icon']", 3);
 
             //Click Edit button
-            IWebElement editSkillButton = driver.FindElement(By.XPath("//div[@data-tab='second']//td[@class='right aligned']//i[@class='outline write icon']"));
             editSkillButton.Click();
 
             //locate and update the value to be edited
-            IWebElement SkillToBeEdited = driver.FindElement(By.XPath("//input[@placeholder='Add Skill']"));
             SkillToBeEdited.Clear();
             SkillToBeEdited.SendKeys(updatedskill);
 
             //Edit the skill level
-            IWebElement chooseSkillLevelDropdown = driver.FindElement(By.XPath("//select[@name='level']"));
-            chooseSkillLevelDropdown.SendKeys(updatedlevel);
+           chooseSkillLevelDropdown.SendKeys(updatedlevel);
 
             //Click on Update button
-            IWebElement updateButton = driver.FindElement(By.XPath("//input[@value='Update']"));
             updateButton.Click();
             Thread.Sleep(3000);
 
@@ -104,8 +96,6 @@ namespace QAMars.Pages
         public void DeleteSkillRecord(string skill)
         {
             Wait.WaitToBeClickable(driver, "XPath", "(//div[@data-tab='second']//i[@class='remove icon'])", 3);
-
-            IWebElement deleteButton = driver.FindElement(By.XPath("(//div[@data-tab='second']//i[@class='remove icon'])"));
             deleteButton.Click();
             Thread.Sleep(3000);
 

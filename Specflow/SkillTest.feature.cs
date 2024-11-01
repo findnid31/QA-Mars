@@ -169,18 +169,25 @@ testRunner.Then("the error message should be displayed successfully", ((string)(
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Edit Skill record with new data")]
+        [NUnit.Framework.CategoryAttribute("EditSkill")]
         [NUnit.Framework.TestCaseAttribute("Baking", "Expert", "Sewing", "Beginner", null)]
         [NUnit.Framework.TestCaseAttribute("Coding", "Beginner", "Baking", "Expert", null)]
         public void EditSkillRecordWithNewData(string skill, string level, string updatedSkill, string updatedLevel, string[] exampleTags)
         {
-            string[] tagsOfScenario = exampleTags;
+            string[] @__tags = new string[] {
+                    "EditSkill"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            string[] tagsOfScenario = @__tags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             argumentsOfScenario.Add("Skill", skill);
             argumentsOfScenario.Add("Level", level);
             argumentsOfScenario.Add("Updated Skill", updatedSkill);
             argumentsOfScenario.Add("Updated Level", updatedLevel);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Edit Skill record with new data", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 34
+#line 35
  this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -190,16 +197,16 @@ testRunner.Then("the error message should be displayed successfully", ((string)(
             else
             {
                 this.ScenarioStart();
-#line 35
+#line 36
  testRunner.Given("I logged into Mars portal", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 36
+#line 37
  testRunner.And("I navigate to Skill tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 37
+#line 38
  testRunner.When(string.Format("I edit an existing \"{0}\" and \"{1}\" to \"{2}\" and level \"{3}\"", skill, level, updatedSkill, updatedLevel), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 38
+#line 39
  testRunner.Then(string.Format("the new \"{0}\" record should be displayed successfully", updatedSkill), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -208,16 +215,23 @@ testRunner.Then("the error message should be displayed successfully", ((string)(
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("delete an existing Skill record")]
+        [NUnit.Framework.CategoryAttribute("DeleteSkill")]
         [NUnit.Framework.TestCaseAttribute("Knitting", "Beginner", null)]
         [NUnit.Framework.TestCaseAttribute("Reading", "Expert", null)]
         public void DeleteAnExistingSkillRecord(string skill, string level, string[] exampleTags)
         {
-            string[] tagsOfScenario = exampleTags;
+            string[] @__tags = new string[] {
+                    "DeleteSkill"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            string[] tagsOfScenario = @__tags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             argumentsOfScenario.Add("Skill", skill);
             argumentsOfScenario.Add("Level", level);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("delete an existing Skill record", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 45
+#line 47
  this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -227,16 +241,16 @@ testRunner.Then("the error message should be displayed successfully", ((string)(
             else
             {
                 this.ScenarioStart();
-#line 46
+#line 48
  testRunner.Given("I logged into Mars portal", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 47
+#line 49
  testRunner.And("I navigate to Skill tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 48
+#line 50
  testRunner.When(string.Format("I have a \"{0}\" and \"{1}\" record to delete", skill, level), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 49
+#line 51
  testRunner.Then("the skill record should be deleted successfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
